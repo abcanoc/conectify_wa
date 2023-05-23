@@ -105,6 +105,17 @@ const ChatBox = (props) => {
     // console.log(props.LoggedUser)
 }, [props.user]);
 
+useEffect(() => {
+  // console.log("id")
+  // console.log(props.user.id)
+  dispatch(getMessages(props.user.id,"20"))
+  console.log("msg")
+  console.log(messages)
+  // console.log("logged u")
+  // console.log(props.LoggedUser)
+}, [messages]);
+
+
 
 //   const getGlobalMessages = useGetGlobalMessages();
 //   const sendGlobalMessage = useSendGlobalMessage();
