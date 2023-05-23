@@ -34,10 +34,10 @@ import { getChannels } from '../Redux/ChannelsDuck';
 // }));
 
 
-const Chat = () => {
+const Chat = (props) => {
     const [scope, setScope] = useState('Global Chat');
     const [tab, setTab] = useState(0);
-    const [user, setUser] = useState('abrilcanoc');
+    const [user, setUser] = useState('');
     const channelsFound = useSelector(store => store.channels)
     const dispatch = useDispatch()
     // const classes = useStyles();
@@ -52,6 +52,8 @@ const Chat = () => {
     }, [user]);
 
     useEffect(() => {
+        // console.log("props chat")
+        // console.log(props.LoggedUser)
         dispatch(getChannels())
     }, []);
 
@@ -59,8 +61,11 @@ const Chat = () => {
         <React.Fragment>
             {/* <Header /> */}
             <Grid container>
-                <Grid item md={4} >
-                    <Paper square elevation={5}>
+                <Grid item md={4} sx={{ zIndex: 8 }}>
+                    <Paper sx={{
+                        minHeight: 'calc(100vh - 64px)',
+                        borderRadius: 0,
+                    }} square elevation={5}>
                         <Paper square>
                             <Tabs
                                 onChange={handleChange}
@@ -97,7 +102,7 @@ const Chat = () => {
                     </Paper>
                 </Grid>
                 <Grid item md={8}>
-                    <ChatBox scope={scope} user={user} />
+                    <ChatBox scope={scope} user={user} LoggedUser = {props.LoggedUser} />
                 </Grid>
             </Grid>
         </React.Fragment>

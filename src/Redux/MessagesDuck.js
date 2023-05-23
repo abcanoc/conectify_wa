@@ -6,7 +6,7 @@ const dataInicial = {
     status: ""
 }
 
-const AG_URL = 'http://34.173.4.99:4000/';
+const AG_URL = process.env.API_GATEWAY_URL || 'http://34.173.4.99:4000/'
 const headers = {
   "content-type": "application/json",
   "apollo-require-preflight": "true"
@@ -33,6 +33,8 @@ export default function messagesReducer(state = dataInicial, action){
 // actions
 
 export const getMessages = (channelId, limit) => async (dispatch, getState) => {
+    console.log("gettingMessages")
+    console.log(channelId)
     const lastMessagesQuery = {
         "query": `query ChannelLastMessages($channelId: String!, $limit: String) {
             channelLastMessages(channelId: $channelId, limit: $limit) {
@@ -77,6 +79,10 @@ export const getMessages = (channelId, limit) => async (dispatch, getState) => {
         // return response.data.data.channelLastMessages;
     }).catch((error) => {
         console.log(error);
+        dispatch({
+            type: GET_MESSAGES,
+            payload: []
+        })
     });
     return response;
 }
@@ -90,7 +96,7 @@ export const createMessage = (channelId, userId, message) => async (dispatch, ge
             "newMessageData": {
                 "channelId": channelId,
                 "content": message,
-                "userId": userId
+                "userId": userId.toString()
             }
         }
     };

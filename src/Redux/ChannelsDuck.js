@@ -5,7 +5,7 @@ const dataInicial = {
     channels: []
 }
 
-const AG_URL = 'http://34.173.4.99:4000/';
+const AG_URL = process.env.API_GATEWAY_URL || 'http://34.173.4.99:4000/'
 const headers = {
   "content-type": "application/json",
   "apollo-require-preflight": "true"

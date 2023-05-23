@@ -100,7 +100,9 @@ const ChatBox = (props) => {
     // console.log(props.user.id)
     dispatch(getMessages(props.user.id,"20"))
     console.log("msg")
-    console.log(msgs)
+    console.log(messages)
+    // console.log("logged u")
+    // console.log(props.LoggedUser)
 }, [props.user]);
 
 
@@ -142,7 +144,7 @@ const ChatBox = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createMessage(props.user.id, "1",newMessage))
+    dispatch(createMessage(props.user.id, props.LoggedUser.toString() ,newMessage))
     // if (props.scope === "Global Chat") {
     //   sendGlobalMessage(newMessage).then(() => {
     //     setNewMessage("");

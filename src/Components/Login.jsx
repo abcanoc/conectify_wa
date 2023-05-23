@@ -22,7 +22,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn(props) {
 
-  const Token = useSelector(store => store.auth)
+  let Token = useSelector(store => store.auth)
   const [valid, setValid] = useState(true);
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -41,15 +41,22 @@ export default function SignIn(props) {
   };
 
   useEffect(() => {
-    console.log(Token.token)
-    console.log(Token)
-    if (Token.token === "Login failed") {
+    Token = ""
+  }, []);
+
+  useEffect(() => {
+    console.log(Token.auth)
+    // console.log(Token.auth.token)  
+    if (Token.auth === "Login failed") {
       console.log("FAILDED")
       console.log(valid)
       setValid(false)
     }
-    if (Token.token !== 'Login failed' && Token.token !== '') {
-      navigate("/Logged");
+    if (Token.auth !== 'Login failed' && Token.auth ) {
+      console.log("Valid")
+      console.log(Token.auth.id)
+      props.setLoggedUser(Token.auth.id)
+      navigate("/Logged"); 
     }
   }, [Token, valid]);
 

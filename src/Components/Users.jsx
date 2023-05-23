@@ -46,8 +46,8 @@ const Users = (props) => {
 
     useEffect(() => {
         dispatch(getChannels())
-        console.log("users")
-        console.log(users)
+        // console.log("users")
+        // console.log(users)
     }, []);
 
 
@@ -60,8 +60,8 @@ const Users = (props) => {
                             //   className={classes.listItem}
                             key={u.id}
                             onClick={() => {
-                                console.log("user")
-                                console.log(u)
+                                // console.log("user")
+                                // console.log(u)
                                 props.setUser(u);
                                 props.setScope(u.name);
                             }}

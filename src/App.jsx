@@ -1,4 +1,5 @@
 import generateStore from './Redux/Store';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {Provider} from 'react-redux'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -32,7 +33,9 @@ const theme = createTheme({
 });
 
 function App() {
+  const [LoggedUser, setLoggedUser] = useState(0);
   return (
+
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
@@ -54,8 +57,8 @@ function App() {
       <Provider store={store}>
         <Router >
           <Routes>
-              <Route exact path="/" element={<Login />}></Route>
-              <Route exact path="/Logged" element={<Chat/>}></Route>
+              <Route exact path="/" element={<Login setLoggedUser = {setLoggedUser}/>}></Route>
+              <Route exact path="/Logged" element={<Chat LoggedUser = {LoggedUser}/>}></Route>
           </Routes>
         </Router> 
       </Provider>
